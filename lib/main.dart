@@ -1,4 +1,5 @@
 import 'package:budget/Transaction/add_transaction.dart';
+import 'package:budget/Transaction/get_transaction_list.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -76,30 +77,21 @@ class _AppState extends State<App> {
         appBar: AppBar(
           title: const Text('Transactions'),
         ),
-        body: Center(
-          child: new AddTransaction(
-            'LMCU',
-            DateTime.now(),
-            'Amazon',
-            5.49,
-            'Family',
-            false,
-          ),
+        body: Column(
+          children: [
+            GetTrasnsactionList(),
+            AddTransaction(
+              'LMCU',
+              DateTime.now(),
+              'Amazon',
+              5.49,
+              'Family',
+              false,
+            ),
+          ],
         ),
       ),
     );
-    // return Column(
-    //   children: [
-    //     AddTransaction(
-    //       'LMCU',
-    //       DateTime.now(),
-    //       'Amazon',
-    //       5.49,
-    //       'Family',
-    //       false,
-    //     ),
-    //   ],
-    // );
   }
 }
 
