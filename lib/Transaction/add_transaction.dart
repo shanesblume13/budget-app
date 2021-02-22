@@ -11,7 +11,7 @@ class AddTransaction extends StatelessWidget {
 
   AddTransaction(
     this.account,
-    this.date,
+    this.date, 
     this.description, 
     this.amount,
     this.category,

@@ -1,5 +1,5 @@
 import 'package:budget/Transaction/add_transaction.dart';
-import 'package:budget/Transaction/get_transaction_list.dart';
+import 'package:budget/Transaction/transaction_list_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -79,7 +79,7 @@ class _AppState extends State<App> {
         ),
         body: Column(
           children: [
-            GetTrasnsactionList(),
+            TrasnsactionListView(),
             AddTransaction(
               'LMCU',
               DateTime.now(),
