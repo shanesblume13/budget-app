@@ -1,5 +1,4 @@
-import 'package:budget/Transaction/add_transaction.dart';
-import 'package:budget/Transaction/transaction_list_view.dart';
+import 'package:budget/View/Transaction/transactions_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -72,27 +71,32 @@ class _AppState extends State<App> {
 
   Widget budgetApp() {
     return MaterialApp(
-      title: 'Blume Budgeting',
+      title: 'Budget App',
+      theme: ThemeData(
+        primarySwatch: Colors.orange,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Transactions'),
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              DrawerHeader(
+                child: Text('Drawer Header'),
+                decoration: BoxDecoration(
+                  color: Colors.orangeAccent,
+                ),
+              ),
+            ],
+          ),
         ),
-        body: Column(
-          children: [
-            TrasnsactionListView(),
-            AddTransaction(
-              'LMCU',
-              DateTime.now(),
-              'Amazon',
-              5.49,
-              'Family',
-              false,
-            ),
-          ],
+        appBar: AppBar(
+          title: const Text('Budget App'),
+        ),
+        body: Center(
+          child: TransactionsPage(),
         ),
       ),
     );
   }
 }
-
-
