@@ -1,6 +1,3 @@
-import 'package:budget/Controller/account_controller.dart';
-import 'package:budget/Controller/category_controller.dart';
-import 'package:budget/Controller/transaction_controller.dart';
 import 'package:budget/View/Transaction/transactions_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

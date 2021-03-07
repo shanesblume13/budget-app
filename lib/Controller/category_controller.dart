@@ -1,5 +1,4 @@
 import 'package:budget/Model/category.dart';
-import 'package:budget/Model/category.dart';
 import 'package:budget/Repository/category_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
