@@ -7,7 +7,6 @@ class TransactionRepository {
 
   Stream<Iterable<Transaction>> getTransactionList() {
     return transactionsCollectionReference
-        .where('amount', isLessThan: 0)
         .get()
         .then((snapshot) {
       return snapshot.docs.map((doc) => Transaction.fromDocument(doc)).toList();

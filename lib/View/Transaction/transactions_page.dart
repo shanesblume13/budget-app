@@ -1,7 +1,9 @@
 import 'package:budget/Controller/category_controller.dart';
 import 'package:budget/Controller/transaction_controller.dart';
+import 'package:budget/Model/transaction.dart';
 import 'package:budget/View/Transaction/components/transactions_list_view.dart';
 import 'package:budget/View/Transaction/components/transactions_total_amount.dart';
+import 'package:budget/View/Transaction/transaction_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -26,7 +28,7 @@ class TransactionsPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => transactionController.addTransaction(),
+        onPressed: () => Get.to(() => TransactionDetailPage(transaction: Transaction())),
         child: Icon(Icons.add),
       ),
     );

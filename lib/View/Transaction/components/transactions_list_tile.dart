@@ -20,7 +20,7 @@ class TransactionsListTile extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        Get.to(TransactionDetailPage(transaction: transaction));
+        Get.to(() => TransactionDetailPage(transaction: transaction));
       },
       child: Card(
         margin: const EdgeInsets.all(8),
@@ -48,8 +48,8 @@ class TransactionsListTile extends StatelessWidget {
                         style: TextStyle(fontSize: 16),
                       ),
                       Text(
-                        DateFormat.yMMMd().format(transaction.clearedDate),
-                        style: TextStyle(fontSize: 12),
+                        transaction.clearedDate != null ? DateFormat.yMMMd().format(transaction.clearedDate) : 'Pending',
+                        style: TextStyle(fontSize: 16),
                       ),
                     ],
                   ),

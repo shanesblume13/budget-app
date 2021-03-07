@@ -21,15 +21,7 @@ class TransactionController extends GetxController {
     return _transactionRepo.getTransactionList();
   }
 
-  void addTransaction() async {
-    Transaction transaction = Transaction(
-      description: 'A new transaction',
-      amount: -.99,
-      clearedDate: DateTime.now(),
-      accountDocRef: null,
-      categoryDocRef: null,
-    );
-
+  void addTransaction(Transaction transaction) async {
     try {
       await _transactionRepo.addTransaction(transaction).then((docRef) {
         transaction.docRef = docRef;

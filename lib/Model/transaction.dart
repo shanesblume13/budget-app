@@ -27,7 +27,7 @@ class Transaction {
         docRef: document.reference,
         description: document.data()['description'],
         amount: document.data()['amount'].toDouble(),
-        clearedDate: document.data()['clearedDate'].toDate(),
+        clearedDate: document.data()['clearedDate']?.toDate(),
         accountDocRef: document.data()['accountDocRef'],
         categoryDocRef: document.data()['categoryDocRef'],
       );
