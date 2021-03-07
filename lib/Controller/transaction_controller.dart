@@ -1,19 +1,10 @@
-import 'package:budget/Model/account.dart';
-import 'package:budget/Model/category.dart';
 import 'package:budget/Model/transaction.dart';
-import 'package:budget/Repository/account_repository.dart';
-import 'package:budget/Repository/category_repository.dart';
 import 'package:budget/Repository/transaction_repository.dart';
 import 'package:get/get.dart';
 
 class TransactionController extends GetxController {
   final TransactionRepository _transactionRepo = TransactionRepository();
-  final CategoryRepository _categoryRepo = CategoryRepository();
-  final AccountRepository _accountRepo = AccountRepository();
-
-  var transactionList = List<Transaction>().obs;
-  var categoryList = List<Category>().obs;
-  var accountList = List<Account>().obs;
+  RxList<Transaction> transactionList = List<Transaction>().obs;
 
   double get totalAmount =>
       transactionList.fold(0, (sum, item) => sum + item.amount);
@@ -21,36 +12,30 @@ class TransactionController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    fetchTransactionList();
+    
+    transactionList.bindStream(fetchTransactionList());
   }
 
-  void fetchTransactionList() async {
-    await fetchCategoryList();
-    await fetchAccountList();
+  Stream<Iterable<Transaction>> fetchTransactionList() {
+    return _transactionRepo.getTransactionList();
+  }
 
-    List<Transaction> transactionListResult =
-        await _transactionRepo.getTransactionList();
+  void addTransaction() async {
+    Transaction transaction = Transaction(
+      description: 'A new transaction',
+      amount: -.99,
+      clearedDate: DateTime.now(),
+      accountDocRef: null,
+      categoryDocRef: null,
+    );
 
-    for (Transaction transaction in transactionListResult) {
-      if (categoryList.length > 0) {
-        transaction.category = categoryList.first;
-      }
-
-      if (accountList.length > 0) {
-        transaction.account = accountList.first;
-      }
+    try {
+      await _transactionRepo.addTransaction(transaction).then((docRef) {
+        transaction.docRef = docRef;
+        transactionList.add(transaction);
+      });
+    } catch (error) {
+      print('Error adding transaction: $error');
     }
-
-    transactionList.assignAll(transactionListResult);
-  }
-
-  Future<void> fetchCategoryList() async {
-    List<Category> categoryListResult = await _categoryRepo.getCategoryList();
-    categoryList.assignAll(categoryListResult);
-  }
-
-  Future<void> fetchAccountList() async {
-    List<Account> accountListResult = await _accountRepo.getAccountList();
-    accountList.assignAll(accountListResult);
   }
 }

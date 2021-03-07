@@ -3,7 +3,7 @@ import 'package:budget/Model/category.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Transaction {
-  final DocumentReference docRef;
+  DocumentReference docRef;
   final String description;
   final double amount;
   final DateTime clearedDate;
@@ -23,7 +23,7 @@ class Transaction {
     this.category,
   });
 
-  factory Transaction.from(DocumentSnapshot document) => Transaction(
+  factory Transaction.fromDocument(DocumentSnapshot document) => Transaction(
         docRef: document.reference,
         description: document.data()['description'],
         amount: document.data()['amount'].toDouble(),

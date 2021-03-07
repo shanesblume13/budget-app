@@ -25,6 +25,10 @@ class TransactionsPage extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => transactionController.addTransaction(),
+        child: Icon(Icons.add),
+      ),
     );
   }
 }
