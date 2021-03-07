@@ -11,17 +11,15 @@ class TransactionsListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetX<TransactionController>(
-      builder: (controller) {
-        return ListView.builder(
-          itemCount: controller.transactionList.length,
+    TransactionController _transactionController = Get.find();
+
+    return Obx(() => ListView.builder(
+          itemCount: _transactionController.transactionList.length,
           itemBuilder: (context, index) {
-            Transaction transaction = controller.transactionList[index];
+            Transaction transaction = _transactionController.transactionList[index];
 
             return TransactionsListTile(transaction: transaction);
           },
-        );
-      },
-    );
+        ));
   }
 }

@@ -1,4 +1,5 @@
 import 'package:budget/Model/category.dart';
+import 'package:budget/Model/category.dart';
 import 'package:budget/Repository/category_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
@@ -15,7 +16,7 @@ class CategoryController extends GetxController {
     fetchCategoryList();
   }
 
-  void fetchCategoryList() async {
+  Future<void> fetchCategoryList() async {
     var categoryListResult = await _categoryRepo.getCategoryList();
 
     categoryList.assignAll(categoryListResult);

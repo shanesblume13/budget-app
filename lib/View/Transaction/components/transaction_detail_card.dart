@@ -38,11 +38,11 @@ class TransactionDetailCard extends StatelessWidget {
                       style: TextStyle(fontSize: 12),
                     ),
                     Text(
-                      transaction.category?.name ?? 'Unknown',
+                      transaction.category?.name ?? 'No Category',
                       style: TextStyle(fontSize: 12),
                     ),
                     Text(
-                      transaction.account?.name ?? 'Unknown',
+                      transaction.account?.name ?? 'No Account',
                       style: TextStyle(fontSize: 12),
                     ),
                   ],

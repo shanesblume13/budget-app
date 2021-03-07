@@ -1,39 +1,56 @@
-import 'package:budget/Controller/account_controller.dart';
-import 'package:budget/Controller/category_controller.dart';
 import 'package:budget/Model/account.dart';
 import 'package:budget/Model/category.dart';
 import 'package:budget/Model/transaction.dart';
+import 'package:budget/Repository/account_repository.dart';
+import 'package:budget/Repository/category_repository.dart';
 import 'package:budget/Repository/transaction_repository.dart';
-import 'package:cloud_firestore/cloud_firestore.dart' as cf;
 import 'package:get/get.dart';
 
 class TransactionController extends GetxController {
   final TransactionRepository _transactionRepo = TransactionRepository();
-  final CategoryController _categoryController = Get.put(CategoryController());
-  final AccountController _accountController = Get.put(AccountController());
-  
+  final CategoryRepository _categoryRepo = CategoryRepository();
+  final AccountRepository _accountRepo = AccountRepository();
+
   var transactionList = List<Transaction>().obs;
-  double get totalAmount => transactionList.fold(0, (sum, item) => sum+ item.amount);
+  var categoryList = List<Category>().obs;
+  var accountList = List<Account>().obs;
+
+  double get totalAmount =>
+      transactionList.fold(0, (sum, item) => sum + item.amount);
 
   @override
   void onInit() {
     super.onInit();
-    _accountController.fetchAccountList();
-    _categoryController.fetchCategoryList();
     fetchTransactionList();
   }
 
   void fetchTransactionList() async {
-    List<Transaction> transactionListResult = await _transactionRepo.getTransactionList();
+    await fetchCategoryList();
+    await fetchAccountList();
+
+    List<Transaction> transactionListResult =
+        await _transactionRepo.getTransactionList();
+
+    for (Transaction transaction in transactionListResult) {
+      if (categoryList.length > 0) {
+        transaction.category = categoryList.first;
+      }
+
+      if (accountList.length > 0) {
+        transaction.account = accountList.first;
+      }
+    }
 
     transactionList.assignAll(transactionListResult);
   }
 
-  Category fetchCategoryFromDocRef(cf.DocumentReference categoryDocRef) {
-    return _categoryController.fetchCategoryFromDocRef(categoryDocRef);
+  Future<void> fetchCategoryList() async {
+    List<Category> categoryListResult = await _categoryRepo.getCategoryList();
+    categoryList.assignAll(categoryListResult);
   }
 
-  Account fetchAccountFromDocRef(cf.DocumentReference accountDocRef) {
-    return _accountController.fetchAccountFromDocRef(accountDocRef);
+  Future<void> fetchAccountList() async {
+    List<Account> accountListResult = await _accountRepo.getAccountList();
+    accountList.assignAll(accountListResult);
   }
 }

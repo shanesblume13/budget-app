@@ -1,4 +1,3 @@
-import 'package:budget/Controller/transaction_controller.dart';
 import 'package:budget/Model/account.dart';
 import 'package:budget/Model/category.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -9,9 +8,9 @@ class Transaction {
   final double amount;
   final DateTime clearedDate;
   final DocumentReference accountDocRef;
-  final Account account;
+  Account account;
   final DocumentReference categoryDocRef;
-  final Category category;
+  Category category;
 
   Transaction({
     this.docRef,
@@ -24,16 +23,12 @@ class Transaction {
     this.category,
   });
 
-  final TransactionController _transactionController = TransactionController();
-
   factory Transaction.from(DocumentSnapshot document) => Transaction(
         docRef: document.reference,
         description: document.data()['description'],
         amount: document.data()['amount'].toDouble(),
         clearedDate: document.data()['clearedDate'].toDate(),
         accountDocRef: document.data()['accountDocRef'],
-        account: TransactionController().fetchAccountFromDocRef(document.data()['accountDocRef']),
         categoryDocRef: document.data()['categoryDocRef'],
-        category: TransactionController().fetchCategoryFromDocRef(document.data()['categoryDocRef']),
       );
 }

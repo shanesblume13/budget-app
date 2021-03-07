@@ -1,3 +1,4 @@
+import 'package:budget/Controller/category_controller.dart';
 import 'package:budget/Controller/transaction_controller.dart';
 import 'package:budget/View/Transaction/components/transactions_list_view.dart';
 import 'package:budget/View/Transaction/components/transactions_total_amount.dart';
@@ -5,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class TransactionsPage extends StatelessWidget {
+  final CategoryController categoryController =
+      Get.put(CategoryController());  
   final TransactionController transactionController =
       Get.put(TransactionController());
 

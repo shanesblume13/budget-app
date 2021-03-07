@@ -44,6 +44,14 @@ class TransactionsListTile extends StatelessWidget {
                         style: TextStyle(fontSize: 16),
                       ),
                       Text(
+                        transaction.category?.name ?? 'No Category',
+                        style: TextStyle(fontSize: 16),
+                      ),                      
+                      Text(
+                        transaction.account?.name ?? 'No Account',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      Text(
                         DateFormat.yMMMd().format(transaction.clearedDate),
                         style: TextStyle(fontSize: 12),
                       ),
