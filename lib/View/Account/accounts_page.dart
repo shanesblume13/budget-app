@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AccountsPage extends StatelessWidget {
-  final accountController = Get.put(AccountController());
+  final AccountController accountController = Get.put(AccountController());
 
   @override
   Widget build(BuildContext context) {
@@ -24,5 +24,3 @@ class AccountsPage extends StatelessWidget {
     );
   }
 }
-
-

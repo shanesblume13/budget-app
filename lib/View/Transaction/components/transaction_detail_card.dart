@@ -37,6 +37,14 @@ class TransactionDetailCard extends StatelessWidget {
                       DateFormat.yMMMd().format(transaction.clearedDate),
                       style: TextStyle(fontSize: 12),
                     ),
+                    Text(
+                      transaction.category?.name ?? 'Unknown',
+                      style: TextStyle(fontSize: 12),
+                    ),
+                    Text(
+                      transaction.account?.name ?? 'Unknown',
+                      style: TextStyle(fontSize: 12),
+                    ),
                   ],
                 ),
                 Column(

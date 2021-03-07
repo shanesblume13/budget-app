@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class TransactionsPage extends StatelessWidget {
-  final transactionController = Get.put(TransactionController());
+  final TransactionController transactionController =
+      Get.put(TransactionController());
 
   @override
   Widget build(BuildContext context) {
@@ -24,5 +25,3 @@ class TransactionsPage extends StatelessWidget {
     );
   }
 }
-
-
