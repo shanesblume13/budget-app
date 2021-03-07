@@ -1,5 +1,6 @@
 import 'package:budget/Model/transaction.dart';
 import 'package:budget/Repository/transaction_repository.dart';
+import 'package:cloud_firestore/cloud_firestore.dart' as cf;
 import 'package:get/get.dart';
 
 class TransactionController extends GetxController {
@@ -12,7 +13,7 @@ class TransactionController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    
+
     transactionList.bindStream(fetchTransactionList());
   }
 
@@ -36,6 +37,16 @@ class TransactionController extends GetxController {
       });
     } catch (error) {
       print('Error adding transaction: $error');
+    }
+  }
+
+  void deleteTransaction(cf.DocumentReference docRef) async {
+    try {
+      await _transactionRepo.deleteTransaction(docRef);
+      transactionList
+          .removeWhere((transaction) => transaction.docRef == docRef);
+    } catch (error) {
+      print('Error deleting transaction: $error');
     }
   }
 }

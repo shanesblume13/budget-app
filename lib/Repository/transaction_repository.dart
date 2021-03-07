@@ -2,10 +2,14 @@ import 'package:budget/Model/transaction.dart';
 import 'package:cloud_firestore/cloud_firestore.dart' as cf;
 
 class TransactionRepository {
-  cf.CollectionReference transactionsCollectionReference = cf.FirebaseFirestore.instance.collection('transactions');
+  cf.CollectionReference transactionsCollectionReference =
+      cf.FirebaseFirestore.instance.collection('transactions');
 
   Stream<Iterable<Transaction>> getTransactionList() {
-    return transactionsCollectionReference.where('amount', isLessThan: 0).get().then((snapshot) {
+    return transactionsCollectionReference
+        .where('amount', isLessThan: 0)
+        .get()
+        .then((snapshot) {
       return snapshot.docs.map((doc) => Transaction.fromDocument(doc)).toList();
     }).asStream();
   }
@@ -20,5 +24,9 @@ class TransactionRepository {
     });
 
     return result;
+  }
+
+  Future<void> deleteTransaction(cf.DocumentReference docRef) {
+    return transactionsCollectionReference.doc(docRef.id).delete();
   }
 }

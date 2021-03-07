@@ -1,6 +1,7 @@
 import 'package:budget/Model/transaction.dart';
 import 'package:budget/View/Transaction/transaction_detail_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class TransactionsListTile extends StatelessWidget {
@@ -19,12 +20,7 @@ class TransactionsListTile extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => TransactionDetailPage(transaction: transaction),
-          ),
-        );
+        Get.to(TransactionDetailPage(transaction: transaction));
       },
       child: Card(
         margin: const EdgeInsets.all(8),
