@@ -6,7 +6,9 @@ class TransactionRepository {
       cf.FirebaseFirestore.instance.collection('transactions');
 
   Stream<Iterable<Transaction>> getTransactionList() {
+    // TODO Put Pending transactions at top of list. Maybe by combining two lists?
     return transactionsCollectionReference
+        .orderBy('clearedDate', descending: true)
         .get()
         .then((snapshot) {
       return snapshot.docs.map((doc) => Transaction.fromDocument(doc)).toList();

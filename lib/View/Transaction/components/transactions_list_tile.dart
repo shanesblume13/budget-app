@@ -48,7 +48,7 @@ class TransactionsListTile extends StatelessWidget {
                         style: TextStyle(fontSize: 16),
                       ),
                       Text(
-                        transaction.clearedDate != null ? DateFormat.yMMMd().format(transaction.clearedDate) : 'Pending',
+                        transaction.clearedDate != null ? DateFormat.yMd().format(transaction.clearedDate) : 'Pending',
                         style: TextStyle(fontSize: 16),
                       ),
                     ],
